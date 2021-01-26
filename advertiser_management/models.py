@@ -29,7 +29,7 @@ class Advertiser(BaseAdvertising):
 class Ad(BaseAdvertising):
     advertiser = models.ForeignKey(Advertiser, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='ads/', default='default.jpg')
+    image = models.ImageField(upload_to='ads/')
     link = models.URLField()
 
     def inc_clicks(self):
@@ -48,4 +48,4 @@ class Ad(BaseAdvertising):
 class AdForm(ModelForm):
     class Meta:
         model = Ad
-        fields = '__all__'
+        fields = ['advertiser', 'title', 'image', 'link']

@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from advertiser_management.models import Advertiser, Ad
+from django.views.generic import CreateView
+
+from advertiser_management.models import Advertiser, Ad, AdForm
 
 
 # Create your views here.
@@ -17,8 +19,10 @@ def ads(request):
     return render(request, 'advertiser_management/ads.html', context)
 
 
-def create_ad(request):
-    return HttpResponse("this is create_ad view")
+class CreateAdView(CreateView):
+    model = Ad
+    template_name = 'advertiser_management/create_ad.html'
+    fields = ['advertiser', 'title', 'image', 'link']
 
 
 def click(request, ad_id):
