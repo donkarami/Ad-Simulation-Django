@@ -1,10 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from advertiser_management.models import Advertiser
 
 
 # Create your views here.
-def index(request):
-    return HttpResponse("this is index view")
+
+
+def ads(request):
+    advertisers = Advertiser.objects.order_by('name')
+    for advertiser in advertisers:
+        for ad in advertiser.ad_set.all():
+            ad.inc_views()
+    context = {
+        'advertisers': advertisers
+    }
+    return render(request, 'advertiser_management/ads.html', context)
 
 
 def create_ad(request):
