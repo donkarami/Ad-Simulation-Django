@@ -1,7 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
+from django.forms import ModelForm
+
+
 class BaseAdvertising(models.Model):
     clicks = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
@@ -41,3 +43,9 @@ class Ad(BaseAdvertising):
         self.save()
         self.advertiser.inc_views()
         return
+
+
+class AdForm(ModelForm):
+    class Meta:
+        model = Ad
+        fields = '__all__'
