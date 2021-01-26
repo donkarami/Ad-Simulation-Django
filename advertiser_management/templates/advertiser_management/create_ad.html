@@ -6,13 +6,26 @@
           crossorigin="anonymous">
     <title>Create Ad View</title>
 </head>
-<h1 class="text">Create New Ad</h1>
-<body>
-<div class='container'>
+
+<body style="background-color: aliceblue ">
+<div class='container'
+     style="background-color: gainsboro ;border-style:solid ;border-radius: 4px;max-width: 290px ;margin-top :10%  ">
+    <h1 class="text" style="color: darkblue;font-family: '2  Badr'; alignment: center ;">Create New Ad</h1>
     <form class="column" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-dark">Save</button>
+        <div class="col">
+            <div style="font-family: 'Times New Roman' ;font-size: 20px ">Advertiser ID</div>
+            <div>{{ form.advertiser }}</div>
+            <div style="font-family: 'Times New Roman' ;font-size: 20px ">Title</div>
+            <div>{{ form.title }}</div>
+            <div style="font-family: 'Times New Roman' ;font-size: 20px ">Image</div>
+            <div>{{ form.image }}</div>
+            <div style="font-family: 'Times New Roman' ;font-size: 20px ">URL</div>
+            <div>{{ form.link }}</div>
+            <br>
+            <button type="submit" class="btn btn-dark">Save</button>
+        </div>
+
     </form>
 </div>
 
