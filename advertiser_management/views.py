@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from advertiser_management.models import Advertiser
+from django.shortcuts import render, get_object_or_404, redirect
+from advertiser_management.models import Advertiser, Ad
 
 
 # Create your views here.
@@ -22,4 +22,7 @@ def create_ad(request):
 
 
 def click(request, ad_id):
-    return HttpResponse("this is click %s view" % ad_id)
+    ad = get_object_or_404(Ad, pk=ad_id)
+    ad.inc_clicks()
+    ad.save()
+    return redirect(ad.link)
