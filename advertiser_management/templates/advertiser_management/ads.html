@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <title>Ads View</title>
+</head>
+<body>
+<a href="{% url 'advertiser_management:create_ad' %}" type="button" class="btn btn-outline-success">Create New Ad</a>
+<div class="container" dir="rtl">
+    {% for advertiser in advertisers %}
+        <div class="card mt-2 p-2">
+            <h5 class="card-title">{{ advertiser.name }}</h5>
+            <div class="card-body">
+                <div class="row">
+                    {% for ad in advertiser.ad_set.all %}
+                        <div class="card col-md-2 p-0 mx-2">
+                            <a href="/click/{{ ad.id }}/">
+                                <img src="{{ ad.image.url }}"
+                                     class=" card-img-top">
+                                <div class="card-body">
+                                    <span>{{ ad.title }}</span>
+                                </div>
+                            </a>
+                            <div class="card-body">
+                                <span>views: {{ ad.views }}</span>
+                                <br>
+                                <span>clicks: {{ ad.clicks }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
