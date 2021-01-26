@@ -1,7 +1,8 @@
 from django.db import models
 
 # Create your models here.
-from django.forms import ModelForm
+from django.forms import ModelForm, forms
+from django.urls import reverse
 
 
 class BaseAdvertising(models.Model):
@@ -44,8 +45,11 @@ class Ad(BaseAdvertising):
         self.advertiser.inc_views()
         return
 
+    def get_absolute_url(self):
+        return reverse('advertiser_management:ads')
+
 
 class AdForm(ModelForm):
     class Meta:
         model = Ad
-        fields = ['advertiser', 'title', 'image', 'link']
+        fields = ('advertiser', 'title', 'image', 'link')

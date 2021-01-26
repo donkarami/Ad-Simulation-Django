@@ -22,7 +22,7 @@ def ads(request):
 class CreateAdView(CreateView):
     model = Ad
     template_name = 'advertiser_management/create_ad.html'
-    fields = ['advertiser', 'title', 'image', 'link']
+    fields = ('advertiser', 'title', 'image', 'link')
 
 
 def click(request, ad_id):
