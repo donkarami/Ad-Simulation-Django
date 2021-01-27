@@ -26,6 +26,9 @@ class Advertiser(BaseAdvertising):
         self.save()
         return
 
+    def __str__(self):
+        return self.name
+
 
 class Ad(BaseAdvertising):
     advertiser = models.ForeignKey(Advertiser, on_delete=models.CASCADE)
