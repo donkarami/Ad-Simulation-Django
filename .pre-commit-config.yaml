@@ -1,0 +1,40 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/ambv/black
+    rev: 991f19031cc66dbaa62384a6f7387a3db5c58335
+    hooks:
+    - id: black
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 41e26ab636aab10b8b367c9654d606604c0e5da8
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+-   repo: https://github.com/asottile/seed-isort-config
+    rev: v2.1.0
+    hooks:
+      - id: seed-isort-config
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+      - id: flake8
+-   repo: https://github.com/timothycrosley/isort
+    rev: 4.3.21
+    hooks:
+      - id: isort
+
+-   repo: local
+    hooks:
+      - id: pre-commit-django-migrations
+        name: Check for uncreated migrations.
+        entry: sh -c "poetry run ./manage.py makemigrations --check --dry-run"
+        language: system
+        types: [python]
+      - id: sync-requirements
+        language: system
+        name: Sync requirements.txt with pyproject.toml.
+        entry: sh -c "poetry export --without-hashes -f requirements.txt > requirements.txt"
+        stages: [commit]
